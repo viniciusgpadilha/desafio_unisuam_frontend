@@ -1,4 +1,13 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import DefaultTemplate from './layouts/DefaultTemplate';
+import router from './router';
+import store from './store';
 
-createApp(App).mount('#app')
+const app = createApp(DefaultTemplate);
+
+app.use(store);
+app.use(router);
+
+
+app.mount('#app');
+

@@ -1,7 +1,7 @@
 <template>
      <div class="container">
         <div class="row">
-            <!-- <div v-if="error" class="alert alert-danger mt-2">{{ error }}</div> -->
+            <div v-if="error" class="alert alert-danger mt-2 text-center">{{ error }}</div>
 
             <div class="col-3">
                 <UserCard v-if="user" :user="user"></UserCard>
@@ -28,21 +28,13 @@ import FollowingList from '../components/FollowingList.vue';
 export default {
     components: { UserCard, FollowingList },
 
-    data() {
-        return {
-            username: '',
-            user: null,
-            followingUsers: null,
-            error: null
-        }
-    },
-
     setup() {
         const store = useStore();
         const route = useRoute();
   
         const user = computed(() => store.getters.user);
         const followingUsers = computed(() => store.getters.followingUsers);
+        const error = computed(() => store.getters.error)
 
         const fetchUserAndFollowing = async () => {
         const username = route.params.username;
@@ -55,7 +47,8 @@ export default {
   
       return {
         user,
-        followingUsers
+        followingUsers,
+        error
       };
     },
 };
